@@ -1,0 +1,198 @@
+
+/* ===== Global Styles ===== */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f8fb;
+  color: #111;
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+}
+#mainMenu {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#mainMenu button {
+  display: inline-block;
+  margin: 10px;
+  width: 200px;
+  font-size: 18px;
+}
+
+/* ===== Card Layout ===== */
+.card {
+  background: #fff;
+  padding: 24px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* ===== Quiz Page ===== */
+#quizCard label {
+  display: block;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto 4px auto;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+}
+
+#quizCard input,
+#quizCard textarea {
+  display: block;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto 12px auto;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #111;
+  resize: vertical;
+}
+
+/* ===== Pack Selection ===== */
+#packSelectCard {
+  text-align: center;
+}
+
+#packSelectCard select {
+  display: block;
+  margin: 0 auto 12px auto;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
+/* ===== Buttons ===== */
+button {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  margin: 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #1e4fd8;
+}
+
+button.ghost {
+  background: transparent;
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+
+
+/* ===== Review Page ===== */
+#reviewCard {
+  text-align: left;
+}
+
+#reviewCard > div {
+  margin-bottom: 10px;
+}
+
+#reviewCard strong {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+#correctTitle,
+#userTitle,
+#correctVerse,
+#userVerseBox {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: left;
+  margin-left: 0;
+}
+
+.user-verse {
+  word-spacing: 0;
+  letter-spacing: 0;
+}
+
+.user-verse .word {
+  display: inline;
+  white-space: pre-wrap;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Review Text Colors */
+.ok {
+  color: #111;
+}
+
+.spelling,
+.extra {
+  color: #0b66ff;
+  text-decoration: line-through;
+}
+
+.missing {
+  color: #ff2e2e;
+}
+
+.muted {
+  color: #111;
+  font-size: 13px;
+}
+
+/* ===== View Packs Page ===== */
+#packsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  margin-top: 0;
+  text-align: left;
+}
+
+.pack-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pack-card:hover {
+  transform: scale(1.03);
+}
+
+.verse-card {
+  background: #e0f7fa;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
