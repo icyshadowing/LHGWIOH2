@@ -1,4 +1,4 @@
-/* =========================
+e/* =========================
    Quiz Script (All Event Binding inside DOMContentLoaded)
    Supports: 
      - Original single-pack quiz
@@ -189,41 +189,39 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNext();
   });
 // SMС button: show pack select page for advanced quiz
+// SMC button → show pack select for advanced quiz
 startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
     if (!packSelect || !packSelectCard || !mainMenu) return;
 
-    // allow multiple selection for advanced quiz
-    packSelect.multiple = true;
+    packSelect.multiple = true; // allow multiple selection
 
-    // hide main menu, show pack select page
     mainMenu.style.display = "none";
     packSelectCard.style.display = "block";
 
-    // populate options (optional: refresh list)
-    populatePackSelect();
+    populatePackSelect(); // refresh options if needed
 
-    // change "Start" button behavior for advanced quiz
+    // override Start button for advanced quiz
     startQuizBtn.onclick = () => {
         const selectedOptions = [...packSelect.selectedOptions].map(o => o.value);
-        let selected = selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
+        const selected = selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
 
         let pool = [];
         selected.forEach(packName => { pool = pool.concat(VERSE_PACKS[packName] || []); });
 
         if (!pool.length) { alert("No verses available for selected packs."); return; }
 
-        // pick up to 12 random verses
-        pool = shuffle(pool.slice()).slice(0, 12);
+        pool = shuffle(pool).slice(0, 12); // pick 12 random verses
 
         advSession = { verses: pool, index: 0, results: [], finished: false };
 
-        // hide pack select, show quiz
+        // hide pack select page, show quiz page
         packSelectCard.style.display = "none";
-        if (quizCard) quizCard.style.display = "block";
+        quizCard.style.display = "block";
 
         loadAdvancedQuestion();
     };
-});
+};
+
 
 
   submitAnswerBtn && (submitAnswerBtn.onclick = () => {
