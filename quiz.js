@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         advSession = { verses: pool, index: 0, results: [], finished: false };
 
         packSelectCard.style.display = "none";
+        skipBtn.style.display = "none";
         quizCard.style.display = "block";
 
         loadAdvancedQuestion();
