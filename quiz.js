@@ -1,4 +1,4 @@
-e/* =========================
+/* =========================
    Quiz Script (All Event Binding inside DOMContentLoaded)
    Supports: 
      - Original single-pack quiz
