@@ -126,6 +126,8 @@ button.ghost {
   max-height: 80vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #correctTitle,
