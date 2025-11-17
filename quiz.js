@@ -188,22 +188,43 @@ document.addEventListener('DOMContentLoaded', () => {
     if (quizCard) quizCard.style.display = 'block';
     renderNext();
   });
+// SMС button: show pack select page for advanced quiz
+startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
+    if (!packSelect || !packSelectCard || !mainMenu) return;
 
-  startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
-    if (packSelect) packSelect.multiple = true;
-    const selectedOptions = packSelect && [...packSelect.selectedOptions].map(o => o.value);
-    let selected = selectedOptions && selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
-    let pool = [];
-    selected.forEach(packName => { pool = pool.concat(VERSE_PACKS[packName] || []); });
-    if (!pool.length) { alert('No verses available'); return; }
-    pool = shuffle(pool.slice()).slice(0,12);
-    advSession = { verses: pool, index:0, results:[], finished:false };
-    if (mainMenu) mainMenu.style.display='none';
-    if (reviewCard) reviewCard.style.display='none';
-    if (packSelectCard) packSelectCard.style.display='none';
-    if (quizCard) quizCard.style.display='block';
-    loadAdvancedQuestion();
-  });
+    // allow multiple selection for advanced quiz
+    packSelect.multiple = true;
+
+    // hide main menu, show pack select page
+    mainMenu.style.display = "none";
+    packSelectCard.style.display = "block";
+
+    // populate options (optional: refresh list)
+    populatePackSelect();
+
+    // change "Start" button behavior for advanced quiz
+    startQuizBtn.onclick = () => {
+        const selectedOptions = [...packSelect.selectedOptions].map(o => o.value);
+        let selected = selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
+
+        let pool = [];
+        selected.forEach(packName => { pool = pool.concat(VERSE_PACKS[packName] || []); });
+
+        if (!pool.length) { alert("No verses available for selected packs."); return; }
+
+        // pick up to 12 random verses
+        pool = shuffle(pool.slice()).slice(0, 12);
+
+        advSession = { verses: pool, index: 0, results: [], finished: false };
+
+        // hide pack select, show quiz
+        packSelectCard.style.display = "none";
+        if (quizCard) quizCard.style.display = "block";
+
+        loadAdvancedQuestion();
+    };
+});
+
 
   submitAnswerBtn && (submitAnswerBtn.onclick = () => {
     if (advSession && !advSession.finished) submitAdvancedAnswer();
