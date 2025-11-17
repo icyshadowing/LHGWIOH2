@@ -370,34 +370,57 @@ document.addEventListener('DOMContentLoaded', () => {
     advSession.index++;
     if (advSession.index >= advSession.verses.length) {
       advSession.finished = true;
-      showAdvancedReviewPage();
+      showAdvancedSummary();
     } else loadAdvancedQuestion();
   }
 
-  function showAdvancedReviewPage() {
-    if (quizCard) quizCard.style.display='none';
-    if (reviewCard) reviewCard.style.display='block';
-    reviewHeading.textContent = "Advanced Quiz Review";
+ /* =========================================
+   NEW Dedicated SMC Results Page Rendering
+   ========================================= */
+function showAdvancedSummary() {
+  if (!advSession) return;
 
-    let totalScore = 0, html='';
-    advSession.results.forEach((r, idx)=>{
-      totalScore += r.score;
-      html += `<div class="adv-result-block">
-        <h3>${escapeHtml(r.ref || '')} <small>(Verse ${idx+1} — Score: ${r.score})</small></h3>
-        <p><strong>Correct Title:</strong> ${escapeHtml(r.title||'')}</p>
-        <p><strong>Your Title:</strong> ${escapeHtml(r.userTitle||'—')}</p>
-        <p><strong>Correct Verse:</strong> ${escapeHtml(r.verse||'')}</p>
-        <p><strong>Your Verse:</strong></p>
-        <p>${r.highlighted}</p><hr></div>`;
-    });
+  // Hide all other cards
+  if (reviewCard) reviewCard.style.display = 'none';
+  if (quizCard) quizCard.style.display = 'none';
+  if (packSelectCard) packSelectCard.style.display = 'none';
+  if (viewPacksCard) viewPacksCard.style.display = 'none';
+  if (mainMenu) mainMenu.style.display = 'none';
 
-    correctTitle.textContent = "Total Score: "+totalScore;
-    correctVerse.innerHTML = html;
-    nextBtn.style.display='none';
-    retryBtn.style.display='none';
-    skipBtn.style.display='none';
-    backBtn.style.display='block';
+  const smcCard = document.getElementById("smcResultsCard");
+  const smcContainer = document.getElementById("smcResultsContainer");
+  if (!smcCard || !smcContainer) {
+    console.error("SMC Results Card missing.");
+    return;
   }
+
+  let totalScore = 0;
+  let html = "";
+
+  advSession.results.forEach((r, idx) => {
+    totalScore += r.score;
+    html += `
+      <div class="adv-result-block">
+        <h3>${escapeHtml(r.ref || "")}
+          <small>(Verse ${idx + 1} — Score: ${r.score})</small>
+        </h3>
+        <p><strong>Correct Title:</strong> ${escapeHtml(r.title || "")}</p>
+        <p><strong>Your Title:</strong> ${escapeHtml(r.userTitle || "—")}</p>
+        <p><strong>Correct Verse:</strong></p>
+        <p>${escapeHtml(r.verse || "")}</p>
+        <p><strong>Your Verse:</strong></p>
+        <p>${r.highlighted}</p>
+      </div>
+    `;
+  });
+
+  smcContainer.innerHTML = `
+    <h3>Total Score: ${totalScore}</h3>
+    ${html}
+  `;
+
+  smcCard.style.display = "block";
+}
 
   /* =========================
      Init
@@ -406,3 +429,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (packSelect) packSelect.multiple = false;
 
 });
+const smcBackBtn = document.getElementById("smcBackBtn");
+if (smcBackBtn) {
+  smcBackBtn.onclick = () => {
+    document.getElementById("smcResultsCard").style.display = "none";
+    backToMain();
+  };
+}
+
