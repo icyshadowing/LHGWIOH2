@@ -435,8 +435,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (smcBackBtn && smcCard) {
     smcBackBtn.onclick = () => {
-      smcCard.style.display = "none";
-      backToMain();
+    smcCard.style.display = "none";
+    if (reviewCard) reviewCard.style.display = 'none';
+    if (quizCard) quizCard.style.display = 'none';
+    if (packSelectCard) packSelectCard.style.display = 'none';
+    if (viewPacksCard) viewPacksCard.style.display = 'none';
+    if (mainMenu) mainMenu.style.display = 'block';
+      
     };
   }
 });
