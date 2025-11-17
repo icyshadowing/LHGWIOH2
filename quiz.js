@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================= */
   let session = null;
   let advSession = null;
+  let quizMode = "normal"; // "normal" or "advanced"
 
   /* Original Quiz */
   function renderNext() {
@@ -162,13 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* Back to main */
+  /* =========================
+     Back to main
+     ========================= */
   function backToMain() {
     if (reviewCard) reviewCard.style.display = 'none';
     if (quizCard) quizCard.style.display = 'none';
     if (packSelectCard) packSelectCard.style.display = 'none';
     if (viewPacksCard) viewPacksCard.style.display = 'none';
     if (mainMenu) mainMenu.style.display = 'block';
+
+    quizMode = "normal";
     if (packSelect) packSelect.multiple = false;
     populatePackSelect();
     session = null;
@@ -176,54 +181,59 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================
-     Button Wiring
+     Start Quiz & Advanced Quiz
      ========================= */
+  // NORMAL quiz: one pack
   startQuizBtn && (startQuizBtn.onclick = () => {
-    const packName = packSelect.value;
-    if (!packName) { alert('Please pick a pack'); return; }
-    const pack = VERSE_PACKS[packName];
-    session = { pack, remaining: shuffle(pack.slice()), current: null };
-    if (packSelectCard) packSelectCard.style.display = 'none';
-    if (reviewCard) reviewCard.style.display = 'none';
-    if (quizCard) quizCard.style.display = 'block';
-    renderNext();
-  });
-// SMС button: show pack select page for advanced quiz
-// SMC button → show pack select for advanced quiz
-startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
-    if (!packSelect || !packSelectCard || !mainMenu) return;
+    if (!packSelect) return;
 
-    packSelect.multiple = true; // allow multiple selection
+    const selectedOptions = [...packSelect.selectedOptions].map(o => o.value);
+    const selected = selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
 
-    mainMenu.style.display = "none";
-    packSelectCard.style.display = "block";
+    if (quizMode === "normal") {
+        const packName = selected[0];
+        const pack = VERSE_PACKS[packName];
+        if (!pack || !pack.length) { alert("No verses in this pack."); return; }
 
-    populatePackSelect(); // refresh options if needed
+        session = { pack, remaining: shuffle(pack.slice()), current: null };
 
-    // override Start button for advanced quiz
-    startQuizBtn.onclick = () => {
-        const selectedOptions = [...packSelect.selectedOptions].map(o => o.value);
-        const selected = selectedOptions.length ? selectedOptions : Object.keys(VERSE_PACKS);
+        packSelectCard.style.display = "none";
+        reviewCard.style.display = "none";
+        quizCard.style.display = "block";
 
+        renderNext();
+    } else if (quizMode === "advanced") {
+        // ADVANCED: multiple packs, 12 verses
         let pool = [];
         selected.forEach(packName => { pool = pool.concat(VERSE_PACKS[packName] || []); });
 
         if (!pool.length) { alert("No verses available for selected packs."); return; }
 
-        pool = shuffle(pool).slice(0, 12); // pick 12 random verses
+        pool = shuffle(pool).slice(0, 12); 
 
         advSession = { verses: pool, index: 0, results: [], finished: false };
 
-        // hide pack select page, show quiz page
         packSelectCard.style.display = "none";
         quizCard.style.display = "block";
 
         loadAdvancedQuestion();
-    };
-};
+    }
+  });
 
+  // SMC / Advanced quiz button
+  startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
+    quizMode = "advanced";
+    if (!packSelect || !packSelectCard || !mainMenu) return;
 
+    packSelect.multiple = true; 
+    mainMenu.style.display = "none";
+    packSelectCard.style.display = "block";
+    populatePackSelect();
+  });
 
+  /* =========================
+     Submit / Skip / Next / Retry / Back
+     ========================= */
   submitAnswerBtn && (submitAnswerBtn.onclick = () => {
     if (advSession && !advSession.finished) submitAdvancedAnswer();
     else if (session && session.current) showReview(inputTitle.value.trim(), inputVerse.value.trim());
@@ -249,9 +259,7 @@ startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
     renderNext();
   });
 
-  backBtn && (backBtn.onclick = () => {
-    backToMain();
-  });
+  backBtn && (backBtn.onclick = () => backToMain());
 
   goToPackSelectBtn && (goToPackSelectBtn.onclick = () => {
     if (mainMenu) mainMenu.style.display = "none";
@@ -271,7 +279,7 @@ startAdvancedQuizBtn && (startAdvancedQuizBtn.onclick = () => {
   backToMenuBtn2 && (backToMenuBtn2.onclick = backToMain);
 
   /* =========================
-     Populate packs container
+     Packs container
      ========================= */
   function renderPacks() {
     if (!packsContainer) return;
