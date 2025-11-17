@@ -122,6 +122,11 @@ button.ghost {
   font-weight: 600;
   color: #222;
 }
+#smcResultsCard {
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
 #correctTitle,
 #userTitle,
