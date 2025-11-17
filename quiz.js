@@ -429,11 +429,17 @@ function showAdvancedSummary() {
   if (packSelect) packSelect.multiple = false;
 
 });
+const smcCard = document.getElementById("smcResultsCard");
+const smcContainer = document.getElementById("smcResultsContainer");
 const smcBackBtn = document.getElementById("smcBackBtn");
-if (smcBackBtn) {
+
+if (!smcCard || !smcContainer || !smcBackBtn) {
+  console.error("SMC Results Card or its elements missing.");
+} else {
   smcBackBtn.onclick = () => {
-    document.getElementById("smcResultsCard").style.display = "none";
+    smcCard.style.display = "none";
     backToMain();
   };
 }
+
 
