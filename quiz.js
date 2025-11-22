@@ -357,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       userTitle, userVerse,
       score:-sc.totalPenalty,
       highlighted: highlightComparison(v.verse, userVerse)
+      highlighted: highlightComparison(v.title, userTitle)
     });
 
     advSession.index++;
