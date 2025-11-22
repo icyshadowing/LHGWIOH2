@@ -388,12 +388,6 @@ function showAdvancedSummary() {
 
   let totalScore = 0;
   let html = "";
-  if ((uTitle||'').trim().toLowerCase() === (c.title||'').trim().toLowerCase()) {
-      userTitleEl.style.color = "black";
-    } else {
-      userTitleEl.style.color = "blue";
-    }
-  }
   advSession.results.forEach((r, idx) => {
     totalScore += r.score;
     html += `
