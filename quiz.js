@@ -71,34 +71,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function highlightComparison(correct, user) {
-    const cw = tokenize(correct);
-    const uw = tokenize(user);
-    const dp = Array(cw.length + 1).fill(null).map(() => Array(uw.length + 1).fill(0));
-    for (let i = 0; i <= cw.length; i++) dp[i][0] = i;
-    for (let j = 0; j <= uw.length; j++) dp[0][j] = j;
-    for (let i = 1; i <= cw.length; i++) {
-      for (let j = 1; j <= uw.length; j++) {
-        const cost = normalizeWord(cw[i - 1]) === normalizeWord(uw[j - 1]) ? 0 : 1;
-        dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
-      }
-    }
+  const cw = tokenize(correct);
+  const uw = tokenize(user);
+  const dp = Array(cw.length + 1).fill(null).map(() => Array(uw.length + 1).fill(0));
 
-    let i = cw.length, j = uw.length, result = [];
-    while (i > 0 || j > 0) {
-      if (i > 0 && j > 0 && normalizeWord(cw[i - 1]) === normalizeWord(uw[j - 1])) {
-        result.unshift(`<span class="word ok">${escapeHtml(uw[j - 1])}</span>`); i--; j--;
-      } else if (j > 0 && (i === 0 || dp[i][j - 1] <= dp[i - 1][j])) {
-        result.unshift(`<span class="word extra">${strike(escapeHtml(uw[j - 1]))}</span>`); j--;
-      } else if (i > 0 && (j === 0 || dp[i - 1][j] < dp[i][j - 1])) {
-        result.unshift(`<span class="word missing">${escapeHtml(cw[i - 1])}</span>`); i--;
-      } else {
-        if (j > 0) result.unshift(`<span class="word extra">${strike(escapeHtml(uw[j - 1]))}</span>`);
-        if (i > 0) result.push(`<span class="word missing">${escapeHtml(cw[i - 1])}</span>`);
-        i--; j--;
-      }
+  for (let i = 0; i <= cw.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= uw.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= cw.length; i++) {
+    for (let j = 1; j <= uw.length; j++) {
+      const cost = normalizeWord(cw[i - 1]) === normalizeWord(uw[j - 1]) ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
     }
-    return result.join(' ');
   }
+
+  let i = cw.length, j = uw.length;
+  let result = [];
+
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && normalizeWord(cw[i - 1]) === normalizeWord(uw[j - 1])) {
+      result.unshift(`<span class="word ok">${escapeHtml(uw[j - 1])}</span>`);
+      i--; j--;
+    }
+    else if (j > 0 && (i === 0 || dp[i][j - 1] <= dp[i - 1][j])) {
+      // extra word by user
+      result.unshift(`<span class="word extra">${strike(escapeHtml(uw[j - 1]))}</span>`);
+      j--;
+    }
+    else if (i > 0) {
+      // missing correct word
+      result.unshift(`<span class="word missing">${escapeHtml(cw[i - 1])}</span>`);
+      i--;
+    }
+  }
+
+  return result.join(" ");
+}
 
   /* =========================
      Populate pack select
