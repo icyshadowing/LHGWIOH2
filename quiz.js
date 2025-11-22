@@ -1,11 +1,3 @@
-/* =========================
-   Quiz Script (All Event Binding inside DOMContentLoaded)
-   Supports: 
-     - Original single-pack quiz
-     - Advanced Mistake-Based Quiz
-     - View Packs & navigation
-   ========================= */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   /* =========================
