@@ -382,6 +382,9 @@ function highlightComparison(correct, user) {
  /* =========================================
    NEW Dedicated SMC Results Page Rendering
    ========================================= */
+/* =========================================
+   NEW Dedicated SMC Results Page Rendering
+   ========================================= */
 function showAdvancedSummary() {
   if (!advSession) return;
 
@@ -399,30 +402,50 @@ function showAdvancedSummary() {
     return;
   }
 
+  // Build HTML with classes for wrong titles so we can style them
   let totalScore = 0;
   let html = "";
+
   advSession.results.forEach((r, idx) => {
     totalScore += r.score;
+
+    // Determine whether user's title is correct (case-insensitive, normalized)
+    const userTitleNorm = (r.userTitle || "").trim().toLowerCase();
+    const correctTitleNorm = (r.title || "").trim().toLowerCase();
+    const titleWrong = userTitleNorm !== correctTitleNorm;
+
+    // Use a safe displayed userTitle (show '—' when empty)
+    const displayUserTitle = escapeHtml(r.userTitle || "—");
+
     html += `
       <div class="adv-result-block">
         <h3>${escapeHtml(r.ref || "")}
           <small>(Verse ${idx + 1} — Score: ${r.score})</small>
         </h3>
-        <p><strong>Correct Title:</strong> ${escapeHtml(r.title || "")}</p>
-        <p><strong>Your Title:</strong> ${escapeHtml(r.userTitle || "—")}</p>
+
+        <p><strong>Correct Title:</strong> <span class="correct-title">${escapeHtml(r.title || "—")}</span></p>
+
+        <p><strong>Your Title:</strong>
+          <span class="user-title ${titleWrong ? 'wrong' : 'ok'}">${displayUserTitle}</span>
+        </p>
+
         <p><strong>Correct Verse:</strong></p>
-        <p>${escapeHtml(r.verse || "")}</p>
+        <p class="correct-verse">${escapeHtml(r.verse || "")}</p>
+
         <p><strong>Your Verse:</strong></p>
-        <p>${r.highlighted}</p>
+        <p class="user-verse">${r.highlighted}</p>
       </div>
     `;
   });
 
   smcContainer.innerHTML = `
-    <h3>Total Score: ${totalScore}</h3>
+    <div class="smc-summary-header">
+      <h3>Total Score: ${totalScore}</h3>
+    </div>
     ${html}
   `;
 
+  // Show the SMC card
   smcCard.style.display = "block";
 }
 
