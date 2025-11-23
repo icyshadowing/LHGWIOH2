@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return pairs;
   }
 
-  function highlightComparison(correct, user) {
+function highlightComparison(correct, user) {
   const cw = tokenize(correct);
   const uw = tokenize(user);
   const dp = Array(cw.length + 1).fill(null).map(() => Array(uw.length + 1).fill(0));
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   return result.join(" ");
 }
+
 
   /* =========================
      Populate pack select
