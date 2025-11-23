@@ -202,3 +202,17 @@ button.ghost {
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+/* SMC summary styling */
+.adv-result-block { margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px dashed rgba(0,0,0,0.08); }
+.adv-result-block h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; }
+.smc-summary-header h3 { margin: 0 0 1rem 0; }
+
+/* user title states */
+.user-title.ok { color: black; }
+.user-title.wrong { color: #0080ff; font-weight: 600; }
+
+/* leave highlighted verse spans intact (these classes come from highlightComparison) */
+.word.ok { /* matched word */ }
+.word.extra { opacity: 0.55; text-decoration: line-through; }
+.word.missing { text-decoration: underline; opacity: 0.9; }
+
