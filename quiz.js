@@ -47,7 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function tokenize(s) { return s ? s.trim().split(/\s+/) : []; }
-  function normalizeWord(w) { return (w||'').replace(/[\W_]+/g,'').toLowerCase(); }
+  function normalizeWord(w) {
+    return (w || '')
+      .replace(/[;\-]/g, '')      // remove semicolons and dashes
+      .replace(/[\W_]+/g, '')     // remove other punctuation
+      .toLowerCase();
+  }
+
   function escapeHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function strike(text) { return (text||'').split('').map(c => c + '\u0336').join(''); }
 
