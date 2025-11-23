@@ -210,9 +210,3 @@ button.ghost {
 /* user title states */
 .user-title.ok { color: black; }
 .user-title.wrong { color: #0080ff; font-weight: 600; }
-
-/* leave highlighted verse spans intact (these classes come from highlightComparison) */
-.word.ok { /* matched word */ }
-.word.extra { opacity: 0.55; text-decoration: line-through; }
-.word.missing { text-decoration: underline; opacity: 0.9; }
-
