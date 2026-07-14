@@ -305,6 +305,30 @@ function highlightComparison(correct, user) {
     }
   }
 
+  function createFlipCard(v) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "flip-card";
+
+  wrapper.innerHTML = `
+    <div class="flip-inner">
+      
+      <!-- FRONT (HIDDEN) -->
+      <div class="flip-front">
+        ${escapeHtml(v.ref || '')}
+      </div>
+
+      <!-- BACK (REVEALED) -->
+      <div class="flip-back">
+        <h4>${escapeHtml(v.title || '')}</h4>
+        <p><strong>${escapeHtml(v.ref || '')}</strong></p>
+        <p>${escapeHtml(v.verse || '')}</p>
+      </div>
+
+    </div>
+  `;
+
+  return wrapper;
+  }
   function showPackVerses(packName) {
     const pack = VERSE_PACKS[packName] || [];
     if (!packsContainer) return;
@@ -321,14 +345,8 @@ function highlightComparison(correct, user) {
     packsContainer.appendChild(title);
 
     pack.forEach(v => {
-      const vCard = document.createElement("div");
-      vCard.className = "verse-card";
-      vCard.innerHTML = `
-        <h4>${escapeHtml(v.title || '')}</h4>
-        <p><strong>${escapeHtml(v.ref || '')}</strong></p>
-        <p>${escapeHtml(v.verse || '')}</p>
-      `;
-      packsContainer.appendChild(vCard);
+     const flipCard = createFlipCard(v);
+     packsContainer.appendChild(flipCard);
     });
 
     const bottomBackBtn = document.createElement("button");
@@ -477,4 +495,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
     };
   }
+  packsContainer.addEventListener("click", function (e) {
+  const card = e.target.closest(".flip-card");
+  if (card) {
+    card.classList.toggle("flipped");
+  }
+});
 });
