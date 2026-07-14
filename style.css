@@ -219,6 +219,7 @@ button.ghost {
 .flip-inner {
   position: relative;
   width: 100%;
+  heught: 100%;
   transition: transform 0.5s;
   transform-style: preserve-3d;
 }
@@ -231,6 +232,7 @@ button.ghost {
 .flip-back {
   position: absolute;
   width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   border-radius: 10px;
   padding: 16px;
@@ -257,4 +259,7 @@ button.ghost {
 /* Make cards clickable */
 .flip-card {
   cursor: pointer;
+}
+.flip-card {
+  height: 180px;   /* 🔥 THIS FIXES THE SQUEEZE */
 }
