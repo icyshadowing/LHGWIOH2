@@ -217,6 +217,7 @@ button.ghost {
   height: 200px; /* 🔥 IMPORTANT: gives space */
   perspective: 1000px;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .flip-inner {
@@ -272,9 +273,10 @@ button.ghost {
 #viewPacksCard {
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 #mainMenu {
   position: relative;
-  z-index: 10; /* 🔥 ensures buttons are clickable */
+  z-index: 10;/* 🔥 ensures buttons are clickable */
 } 
