@@ -38,32 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Utilities
      ========================= */
-  function showPack(packName) {
-  const pack = VERSE_PACKS[packName];
-  if (!pack) return;
-
-  packsContainer.innerHTML = "";
-
-  pack.forEach(v => {
-    const card = document.createElement("div");
-    card.className = "flip-card";
-    card.dataset.pack = ""; // ✅ IMPORTANT
-
-    card.innerHTML = `
-      <div class="flip-inner">
-        <div class="flip-front">
-          <strong>${v.title}</strong><br>
-          ${v.ref}
-        </div>
-        <div class="flip-back">
-          ${v.verse}
-        </div>
-      </div>
-    `;
-
-    packsContainer.appendChild(card);
-  });
-  }
+ 
   if (packsContainer) {
   packsContainer.addEventListener("click", (e) => {
   const card = e.target.closest(".flip-card");
