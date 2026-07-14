@@ -210,3 +210,51 @@ button.ghost {
 /* user title states */
 .user-title.ok { color: black; }
 .user-title.wrong { color: #0080ff; font-weight: 600; }
+/* ===== Flip Card for Verse Sets ===== */
+.flip-card {
+  perspective: 1000px;
+  margin-bottom: 12px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Hidden side (ONLY verse ref) */
+.flip-front {
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  height: 100px;
+}
+
+/* Revealed side */
+.flip-back {
+  background: #e0f7fa;
+  transform: rotateY(180deg);
+}
+
+/* Make cards clickable */
+.flip-card {
+  cursor: pointer;
+}
