@@ -38,6 +38,31 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Utilities
      ========================= */
+  function showPack(packName) {
+  const pack = VERSE_PACKS[packName];
+  if (!pack) return;
+
+  packsContainer.innerHTML = ""; // clear previous
+
+  pack.forEach(v => {
+    const card = document.createElement("div");
+    card.className = "flip-card";
+
+    card.innerHTML = `
+      <div class="flip-inner">
+        <div class="flip-front">
+          <strong>${v.title}</strong><br>
+          ${v.ref}
+        </div>
+        <div class="flip-back">
+          ${v.verse}
+        </div>
+      </div>
+    `;
+
+    packsContainer.appendChild(card);
+  });
+  }
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
