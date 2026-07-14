@@ -258,4 +258,6 @@ button.ghost {
   font-weight: 600;
 }
 
+
 /* Back */
+.flip-back {   background: #e0f7fa;   transform: rotateY(180deg);   display: block; /* 🔥 CHANGE from flex */   text-align: left; /* 🔥 left align for readability */      overflow-y: auto;   padding: 12px;   line-height: 1.5; } 
