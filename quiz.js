@@ -520,10 +520,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainMenu) mainMenu.style.display = 'block';
       
     };
-  }
- packsContainer.addEventListener("click", function (e) {
-  const card = e.target.closest(".flip-card");
-  if (card) {
-    card.classList.toggle("flipped");
-  }
-});
+  }) ;
+ 
