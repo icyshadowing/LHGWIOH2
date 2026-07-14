@@ -64,12 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
     packsContainer.appendChild(card);
   });
   }
+  if (packsContainer) {
   packsContainer.addEventListener("click", (e) => {
   const card = e.target.closest(".flip-card");
   if (card) {
     card.classList.toggle("flipped");
   }
   });
+  } 
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
