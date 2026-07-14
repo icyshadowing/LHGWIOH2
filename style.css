@@ -270,5 +270,6 @@ button.ghost {
 /* BACK */
 .flip-back {
   transform: rotateY(180deg);
+  margin-bottom: 8px;
 }
 
