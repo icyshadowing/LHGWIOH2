@@ -175,19 +175,27 @@ button.ghost {
 /* ===== View Packs Page ===== */
 #packsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px); /* 🔥 fixed width */
+  grid-template-columns: repeat(auto-fill, 220px); /* 🔥 fixed width */
   gap: 16px;
   padding: 16px;
   justify-content: center; /* centers the grid */
 }
 
 .pack-card {
-  background: #fff;
+  width: 220px;          /* 🔥 smaller width */
+  height: 80px;          /* 🔥 controls height */
+  padding: 10px;         /* reduce padding */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
   border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  cursor: pointer;
-  transition: transform 0.2s;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+  overflow: hidden;      /* prevents stretching */
 }
 
 .pack-card:hover {
@@ -263,8 +271,4 @@ button.ghost {
 .flip-back {
   transform: rotateY(180deg);
 }
-.pack-card {
-  width: 300px;        /* 🔥 adjust this */
-  max-width: 100%;
-  text-align: center;
-}
+
