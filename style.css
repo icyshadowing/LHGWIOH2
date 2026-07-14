@@ -175,9 +175,10 @@ button.ghost {
 /* ===== View Packs Page ===== */
 #packsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, 300px); /* 🔥 fixed width */
   gap: 16px;
   padding: 16px;
+  justify-content: center; /* centers the grid */
 }
 
 .pack-card {
