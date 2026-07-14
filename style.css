@@ -264,12 +264,6 @@ button.ghost {
 .flip-back {
   transform: rotateY(180deg);
 }
-.packsContainer,
-#packsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .pack-card {
   width: 300px;        /* 🔥 adjust this */
   max-width: 100%;
