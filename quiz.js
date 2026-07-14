@@ -521,10 +521,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
     };
   }
-  packsContainer.addEventListener("click", function (e) {
+ packsContainer.addEventListener("click", function (e) {
   const card = e.target.closest(".flip-card");
   if (card) {
     card.classList.toggle("flipped");
   }
-});
 });
