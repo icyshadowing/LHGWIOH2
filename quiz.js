@@ -42,11 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pack = VERSE_PACKS[packName];
   if (!pack) return;
 
-  packsContainer.innerHTML = ""; // clear previous
+  packsContainer.innerHTML = "";
 
   pack.forEach(v => {
     const card = document.createElement("div");
     card.className = "flip-card";
+    card.dataset.pack = ""; // ✅ IMPORTANT
 
     card.innerHTML = `
       <div class="flip-inner">
