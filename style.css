@@ -210,18 +210,21 @@ button.ghost {
 /* user title states */
 .user-title.ok { color: black; }
 .user-title.wrong { color: #0080ff; font-weight: 600; }
-/* ===== Flip Card for Verse Sets ===== */
+/* ===== Flip Card FIXED VERSION ===== */
+
 .flip-card {
+  width: 100%;
+  height: 200px; /* 🔥 IMPORTANT: gives space */
   perspective: 1000px;
-  margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .flip-inner {
   position: relative;
   width: 100%;
-  heught: 100%;
-  transition: transform 0.5s;
+  height: 100%; /* 🔥 fill parent */
   transform-style: preserve-3d;
+  transition: transform 0.6s;
 }
 
 .flip-card.flipped .flip-inner {
@@ -232,34 +235,31 @@ button.ghost {
 .flip-back {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100%; /* 🔥 critical */
+  top: 0;
+  left: 0;
+
   backface-visibility: hidden;
   border-radius: 10px;
-  padding: 16px;
-  box-sizing: border-box;
-}
 
-/* Hidden side (ONLY verse ref) */
-.flip-front {
-  background: #f1f5f9;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
-  font-size: 18px;
-  height: 100px;
+  text-align: center;
+
+  padding: 12px;
+  box-sizing: border-box;
 }
 
-/* Revealed side */
+/* Front */
+.flip-front {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Back */
 .flip-back {
   background: #e0f7fa;
   transform: rotateY(180deg);
-}
-
-/* Make cards clickable */
-.flip-card {
-  cursor: pointer;
-}
-.flip-card {
-  height: 180px;   /* 🔥 THIS FIXES THE SQUEEZE */
-}
+  overflow-y: auto; /* handles long verses */
+} 
