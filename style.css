@@ -175,7 +175,7 @@ button.ghost {
 /* ===== View Packs Page ===== */
 #packsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px); /* 🔥 fixed width */
+  grid-template-columns: repeat(auto-fill, 200px); /* 🔥 fixed width */
   gap: 16px;
   padding: 16px;
   justify-content: center; /* centers the grid */
