@@ -271,11 +271,11 @@ button.ghost {
 .flip-back {
   transform: rotateY(180deg);
 }
-.flip-back h4 {
-  margin: 0 0 6px 0;
+.flip-back {
+  gap: 6px;
 }
 
+.flip-back h4,
 .flip-back p {
-  margin: 4px 0;
+  margin: 0;
 }
-
