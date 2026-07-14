@@ -253,13 +253,13 @@ button.ghost {
   display: flex;
   flex-direction: column;   /* 🔥 THIS FIXES LEFT→RIGHT ISSUE */
   justify-content: center;
-  align-items: center;
+  align-items: left;
 
   padding: 10px;
   box-sizing: border-box;
 
   border-radius: 12px;
-  background: white;
+  background: blue;
 }
 
 /* FRONT */
