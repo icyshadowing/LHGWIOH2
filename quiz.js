@@ -506,19 +506,3 @@ function showAdvancedSummary() {
   if (packSelect) packSelect.multiple = false;
 
 });
-document.addEventListener('DOMContentLoaded', () => {
-  const smcCard = document.getElementById("smcResultsCard");
-  const smcBackBtn = document.getElementById("smcBackBtn");
-
-  if (smcBackBtn && smcCard) {
-    smcBackBtn.onclick = () => {
-    smcCard.style.display = "none";
-    if (reviewCard) reviewCard.style.display = 'none';
-    if (quizCard) quizCard.style.display = 'none';
-    if (packSelectCard) packSelectCard.style.display = 'none';
-    if (viewPacksCard) viewPacksCard.style.display = 'none';
-    if (mainMenu) mainMenu.style.display = 'block';
-      
-    };
-  }) ;
- 
