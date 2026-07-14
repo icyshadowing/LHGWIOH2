@@ -270,13 +270,3 @@ button.ghost {
   padding: 12px;
   line-height: 1.5;
 }
-#viewPacksCard {
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-
-#mainMenu {
-  position: relative;
-  z-index: 10;/* 🔥 ensures buttons are clickable */
-} 
